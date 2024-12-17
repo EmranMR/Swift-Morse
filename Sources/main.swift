@@ -60,30 +60,32 @@ struct Morse {
     }
   }
 
-  func encode(_ text: String) -> [String] {
-    var encodedText: [String] = []
+  func encode(_ text: String) -> String {
+    var encodedText: String = ""
 
-    text.split(separator: " ").forEach { characters in
-      if let morseCode = encode[String(characters)] {
-        encodedText.append(morseCode)
+    for char in text {
+      if char != " " {
+        if let code = encode[char.uppercased()] { encodedText.append(" \(code) ") }
       }
     }
-  return encodedText
+
+    encodedText.removeLast()    
+    return  encodedText
   }
 
   func decode(_ cipher: String) -> [String] {
     var decodedText: [String] = []
 
-    cipher.split(separator: " ").forEach { characters in
-      if let plainText = decode[String(characters)] {
-        decodedText.append(plainText)
+    cipher.split(separator: " ").forEach {
+      string in
+      if let plainChar = decode[String(string)] {
+        decodedText.append(plainChar)
       }
+
     }
-  return decodedText
+
+    return decodedText
   }
 }
 
-let text = "emran ramezn"
 
-  
-}
